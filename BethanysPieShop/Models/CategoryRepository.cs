@@ -14,6 +14,6 @@ namespace BethanysPieShop.Models
             _appDbContext = appDbContext;
         }
 
-        public IEnumerable<Category> AllCategories => throw new NotImplementedException();
+        public IEnumerable<Category> AllCategories => _appDbContext.Categories;
     }
 }
