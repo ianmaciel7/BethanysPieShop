@@ -1,13 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace BethanysPieShop.Models
 {
-    public class PieRepository : IPieRepository
+    public class PieRepository: IPieRepository
     {
-
         private readonly AppDbContext _appDbContext;
 
         public PieRepository(AppDbContext appDbContext)
@@ -23,12 +23,11 @@ namespace BethanysPieShop.Models
             }
         }
 
-
         public IEnumerable<Pie> PiesOfTheWeek
         {
             get
             {
-                return _appDbContext.Pies.Include(c => c.Category).Where(p => p.IsPieOfTheWeek);   
+                return _appDbContext.Pies.Include(c => c.Category).Where(p => p.IsPieOfTheWeek);
             }
         }
 

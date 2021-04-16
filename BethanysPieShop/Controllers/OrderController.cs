@@ -1,9 +1,16 @@
-﻿using BethanysPieShop.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using BethanysPieShop.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+
+// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace BethanysPieShop.Controllers
 {
-
+    [Authorize]
     public class OrderController : Controller
     {
         private readonly IOrderRepository _orderRepository;
@@ -15,6 +22,7 @@ namespace BethanysPieShop.Controllers
             _shoppingCart = shoppingCart;
         }
 
+        // GET: /<controller>/
         public IActionResult Checkout()
         {
             return View();
@@ -38,15 +46,12 @@ namespace BethanysPieShop.Controllers
                 return RedirectToAction("CheckoutComplete");
             }
             return View(order);
-
         }
 
         public IActionResult CheckoutComplete()
         {
-            ViewBag.CheckoutCompleteMessage = HttpContext.User.Identity.Name +
-                                      ", thanks for your order. You'll soon enjoy our delicious pies!";
+            ViewBag.CheckoutCompleteMessage = "Thanks for your order. You'll soon enjoy our delicious pies!";
             return View();
         }
     }
-
 }
